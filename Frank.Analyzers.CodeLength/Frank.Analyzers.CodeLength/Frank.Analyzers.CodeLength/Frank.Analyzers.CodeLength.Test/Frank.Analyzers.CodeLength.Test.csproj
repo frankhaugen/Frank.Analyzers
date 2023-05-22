@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="6.7.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis" Version="4.3.1" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" Version="1.1.1" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" Version="1.1.1" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Testing.Verifiers.XUnit" Version="1.1.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+        <PackageReference Include="xunit" Version="2.4.2" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Frank.Analyzers.CodeLength.CodeFixes\Frank.Analyzers.CodeLength.CodeFixes.csproj" />
+        <ProjectReference Include="..\Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.csproj" />
+    </ItemGroup>
+
+</Project>

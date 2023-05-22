@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32728.150
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.CodeLength", "Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.csproj", "{D2070686-BA9D-4758-9F26-B718BA8D13E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.CodeLength.CodeFixes", "Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.CodeFixes\Frank.Analyzers.CodeLength.CodeFixes.csproj", "{B6FCB98C-F537-4C1D-892A-51BC53653966}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.CodeLength.Package", "Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.Package\Frank.Analyzers.CodeLength.Package.csproj", "{59F3D423-F2A1-44A4-83A0-E288CE1144AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.CodeLength.Test", "Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.Test\Frank.Analyzers.CodeLength.Test.csproj", "{128471D2-CCC8-4A80-81CA-14E36CF436A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.CodeLength.Vsix", "Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.Vsix\Frank.Analyzers.CodeLength.Vsix.csproj", "{F041F33E-05C2-4B96-9C8B-7A255DF40738}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2070686-BA9D-4758-9F26-B718BA8D13E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2070686-BA9D-4758-9F26-B718BA8D13E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2070686-BA9D-4758-9F26-B718BA8D13E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2070686-BA9D-4758-9F26-B718BA8D13E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6FCB98C-F537-4C1D-892A-51BC53653966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6FCB98C-F537-4C1D-892A-51BC53653966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6FCB98C-F537-4C1D-892A-51BC53653966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6FCB98C-F537-4C1D-892A-51BC53653966}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59F3D423-F2A1-44A4-83A0-E288CE1144AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59F3D423-F2A1-44A4-83A0-E288CE1144AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59F3D423-F2A1-44A4-83A0-E288CE1144AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59F3D423-F2A1-44A4-83A0-E288CE1144AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{128471D2-CCC8-4A80-81CA-14E36CF436A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{128471D2-CCC8-4A80-81CA-14E36CF436A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{128471D2-CCC8-4A80-81CA-14E36CF436A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{128471D2-CCC8-4A80-81CA-14E36CF436A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F041F33E-05C2-4B96-9C8B-7A255DF40738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F041F33E-05C2-4B96-9C8B-7A255DF40738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F041F33E-05C2-4B96-9C8B-7A255DF40738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F041F33E-05C2-4B96-9C8B-7A255DF40738}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9C18032C-0890-479E-84EE-CB401B66394C}
+	EndGlobalSection
+EndGlobal
