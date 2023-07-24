@@ -37,10 +37,10 @@ public class EmbeddedResourceGeneratorTests
         var generators = new ISourceGenerator[] { generator };
         var additionalFiles = new[]
         {
-            new AnalyzerAdditionalText(@"Assets\Teapot.obj", SourceText.From("Hello world")),
-            new AnalyzerAdditionalText(@"Assets\Models\Teapot.obj", SourceText.From("Hello world")),
-            new AnalyzerAdditionalText(@"Assets\Models\My Hole\State.obj", SourceText.From("Hello world")),
-            new AnalyzerAdditionalText(@"Assets\Models\Bob\MtL\Teapot.mtl", SourceText.From("Hello world")),
+            new AnalyzerAdditionalText(@".\Assets\Teapot.obj", SourceText.From("Hello world")),
+            new AnalyzerAdditionalText(@".\Assets\Models\Teapot.obj", SourceText.From("Hello world")),
+            new AnalyzerAdditionalText(@".\Assets\Models\My Hole\State.obj", SourceText.From("Hello world")),
+            new AnalyzerAdditionalText(@".\Assets\Models\Bob\MtL\Teapot.mtl", SourceText.From("Hello world")),
         };
 
         CSharpGeneratorDriver.Create(generators, optionsProvider: new TestOptionsProvider(), additionalTexts: additionalFiles).RunGeneratorsAndUpdateCompilation(inputCompilation, out var outputCompilation, out var diagnostics);

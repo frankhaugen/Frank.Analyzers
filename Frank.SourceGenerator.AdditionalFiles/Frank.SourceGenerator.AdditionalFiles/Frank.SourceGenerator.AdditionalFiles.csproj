@@ -1,12 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-    <IsRoslynComponent>true</IsRoslynComponent>
+    <Authors>Frank R. Haugen</Authors>
+    <Company>Frank R. Haugen</Company>
+    <Copyright>Frank R. Haugen</Copyright>
+    <Description>Source generator for adding additional files to the compilation.</Description>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <IsPackable>true</IsPackable>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <NoWarn>CS1570;CS1591;CS8618</NoWarn>
+    <Nullable>enable</Nullable>
+    <OutputType>Library</OutputType>
+    <PackageDescription>Source generator for adding additional files to the compilation.</PackageDescription>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/frankhaugen/Frank.Analyzers/tree/main/Frank.SourceGenerator.AdditionalFiles</PackageProjectUrl>
+    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageTags>SourceGenerator;Roslyn;AdditionalFiles;CSharp;DotNet;Files;HelperClass;ResourceManagement;CodeGeneration;Net7;Microsoft.CodeAnalysis;SourceText;SyntaxFactory;ProjectFiles;CSharp11;ProjectResources;BuildTools;CodebaseAutomation</PackageTags>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/frankhaugen/Frank.Analyzers/tree/main/Frank.SourceGenerator.AdditionalFiles</RepositoryUrl>
+    <TargetFramework>net7.0</TargetFramework>
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
 
@@ -14,5 +34,10 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" PrivateAssets="all" />
     <PackageReference Include="VsTools.Projects" Version="1.2.0" PrivateAssets="all" GeneratePathProperty="true" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <None Include="../icon.png" Pack="true" PackagePath="/"/>
+    <None Include="../readme.md" Pack="true" PackagePath="/"/>
+  </ItemGroup>
+  
 </Project>
