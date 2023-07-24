@@ -37,11 +37,8 @@ jobs:
       run: echo $TIME $R_TIME $F_TIME $YEAR $DAY
     - name: Set Version
       env:
-        RUN_NUMBER: ${{ env.RUN_NUMBER }}
-        YEAR: ${{ env.YEAR }}
-        MONTH: ${{ env.MONTH }}
-        DAY: ${{ env.DAY }}
-      run: echo "VERSION=$YEAR.$MONTH.$DAY.$RUN_NUMBER" >> $GITHUB_ENV
+        VERSION: "${{ env.YEAR }}${{ env.MONTH }}${{ env.DAY }}.${{ env.RUN_NUMBER }}"
+      run: echo "${{ env.VERSION }}"
 
   build:
     needs: setup
