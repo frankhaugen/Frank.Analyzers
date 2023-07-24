@@ -10,11 +10,16 @@ on:
     branches: [ "main" ]
 
 env:
-  RUN_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
+  RUN_NUMBER: ${{ github.run_number }}
   VERSION: ""
 
 jobs:
   setup:
+    name: Setup
+    runs-on: ubuntu-latest
+
+    steps:
+
     - name: Get Current Time
       uses: josStorer/get-current-time@v2.1.1
       id: current-time
@@ -34,9 +39,10 @@ jobs:
         MONTH: ${{ env.MONTH }}
         DAY: ${{ env.DAY }}
       run: echo "VERSION=$YEAR.$MONTH.$DAY.$RUN_NUMBER" >> $GITHUB_ENV
+
   build:
     needs: setup
-    name: Build ${{ env.VERSION }} 
+    name: Build ${{ vars.env.VERSION }} 
     runs-on: ubuntu-latest
 
     steps:
