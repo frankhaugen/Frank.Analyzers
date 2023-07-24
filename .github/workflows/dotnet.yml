@@ -1,0 +1,85 @@
+# This workflow will build, test, and publish a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  RUN_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
+  VERSION: ""
+
+jobs:
+  setup:
+    - name: Get Current Time
+      uses: josStorer/get-current-time@v2.1.1
+      id: current-time
+      with:
+        format: YYYYMMDD
+        utcOffset: "00:00"
+    - name: Use current time
+      env:
+        YEAR: "${{ steps.current-time.outputs.year }}"
+        MONTH: "${{ steps.current-time.outputs.month }}"
+        DAY: "${{ steps.current-time.outputs.day }}"
+      run: echo $TIME $R_TIME $F_TIME $YEAR $DAY
+    - name: Set Version
+      env:
+        RUN_NUMBER: ${{ env.RUN_NUMBER }}
+        YEAR: ${{ env.YEAR }}
+        MONTH: ${{ env.MONTH }}
+        DAY: ${{ env.DAY }}
+      run: echo "VERSION=$YEAR.$MONTH.$DAY.$RUN_NUMBER" >> $GITHUB_ENV
+  build:
+    needs: setup
+    name: Build ${{ env.VERSION }} 
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore /p:Version=${{ env.VERSION }}
+
+    - name: Test
+      run: dotnet test --no-build
+
+  package:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.x
+
+    - name: Pack
+      run: dotnet pack --configuration Release --no-build --output nupkgs /p:PackageVersion=${{ env.VERSION }}
+
+  publish:
+    needs: package
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Push NuGet
+      run: dotnet nuget push nupkgs/*.nupkg -k ${{ secrets.NugetKey }} -s https://api.nuget.org/v3/index.json --skip-duplicate
