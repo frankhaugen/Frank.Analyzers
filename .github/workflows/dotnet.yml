@@ -1,5 +1,3 @@
-# This workflow will build, test, and publish a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
 name: .NET
 
@@ -36,7 +34,7 @@ jobs:
       run: echo $TIME $R_TIME $F_TIME $YEAR $DAY
     - name: Set Version
       env:
-        VERSION: "${{ env.YEAR }}${{ env.MONTH }}${{ env.DAY }}.${{ env.RUN_NUMBER }}"
+        VERSION: "${{ env.YEAR }}.${{ env.MONTH }}.${{ env.DAY }}.${{ env.RUN_NUMBER }}"
       run: echo "${{ env.VERSION }}"
   build:
     needs: setup
