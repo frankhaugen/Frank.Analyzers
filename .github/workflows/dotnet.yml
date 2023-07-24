@@ -16,13 +16,23 @@ env:
   MONTH: ""
   DAY: ""
 
+
+
 jobs:
+  defaults:
+    runs-on: ubuntu-latest
+    env:
+      RUN_NUMBER: ${{ github.run_number }}
+      VERSION: ""
+      YEAR: ""
+      MONTH: ""
+      DAY: ""
+
   setup:
     name: Setup
     runs-on: ubuntu-latest
-
+    
     steps:
-
     - name: Get Current Time
       uses: josStorer/get-current-time@v2.1.1
       id: current-time
@@ -39,7 +49,6 @@ jobs:
       env:
         VERSION: "${{ env.YEAR }}${{ env.MONTH }}${{ env.DAY }}.${{ env.RUN_NUMBER }}"
       run: echo "${{ env.VERSION }}"
-
   build:
     needs: setup
     name: Build ${{ vars.env.VERSION }} 
@@ -55,12 +64,15 @@ jobs:
         dotnet-version: 7.0.x
 
     - name: Restore dependencies
+      working-directory: ./Frank.SourceGenerator.AdditionalFiles/
       run: dotnet restore
 
     - name: Build
+      working-directory: ./Frank.SourceGenerator.AdditionalFiles/
       run: dotnet build --configuration Release --no-restore /p:Version=${{ env.VERSION }}
 
     - name: Test
+      working-directory: ./Frank.SourceGenerator.AdditionalFiles/
       run: dotnet test --no-build
 
   package:
@@ -77,6 +89,7 @@ jobs:
         dotnet-version: 7.0.x
 
     - name: Pack
+      working-directory: ./Frank.SourceGenerator.AdditionalFiles/
       run: dotnet pack --configuration Release --no-build --output nupkgs /p:PackageVersion=${{ env.VERSION }}
 
   publish:
@@ -88,4 +101,5 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Push NuGet
+      working-directory: ./Frank.SourceGenerator.AdditionalFiles/
       run: dotnet nuget push nupkgs/*.nupkg -k ${{ secrets.NugetKey }} -s https://api.nuget.org/v3/index.json --skip-duplicate
