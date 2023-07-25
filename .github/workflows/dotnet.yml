@@ -31,9 +31,6 @@ jobs:
         YEAR: "${{ steps.current-time.outputs.year }}"
         MONTH: "${{ steps.current-time.outputs.month }}"
         DAY: "${{ steps.current-time.outputs.day }}"
-      run: echo $TIME $R_TIME $F_TIME $YEAR $DAY
-    - name: Set Version
-      env:
         VERSION: "${{ env.YEAR }}.${{ env.MONTH }}.${{ env.DAY }}.${{ env.RUN_NUMBER }}"
       run: echo "${{ env.VERSION }}"
   build:
