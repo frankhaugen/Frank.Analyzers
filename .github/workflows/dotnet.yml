@@ -14,18 +14,7 @@ env:
   MONTH: ""
   DAY: ""
 
-jobs:  
-  job1:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set environment variable
-        run: echo "FOO=bar" >> $GITHUB_ENV
-
-  job2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Use environment variable
-        run: echo $FOO
+jobs:
   setup:
     name: Setup
     runs-on: ubuntu-latest
@@ -43,21 +32,25 @@ jobs:
         MONTH: "${{ steps.current-time.outputs.month }}"
         DAY: "${{ steps.current-time.outputs.day }}"
         VERSION: "${{ env.YEAR }}.${{ env.MONTH }}.${{ env.DAY }}.${{ env.RUN_NUMBER }}"
-      run: echo "${{ env.VERSION }}"
-  build:
-    needs: setup
-    name: Build ${{ vars.env.VERSION }} 
+      run: echo ${{ env.VERSION }} >> $GITHUB_ENV
+  verifly:
+    name: Verify
     runs-on: ubuntu-latest
 
     steps:
+    - name: Verify version
+      run: echo ${{ env.VERSION }}
+
+  build:
+    runs-on: ubuntu-latest
+  
+    steps:
     - name: Checkout
       uses: actions/checkout@v2
-
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 7.0.x
-
     - name: Restore dependencies
       working-directory: ./Frank.SourceGenerator.AdditionalFiles/
       run: dotnet restore
