@@ -14,7 +14,18 @@ env:
   MONTH: ""
   DAY: ""
 
-jobs:
+jobs:  
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set environment variable
+        run: echo "FOO=bar" >> $GITHUB_ENV
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use environment variable
+        run: echo $FOO
   setup:
     name: Setup
     runs-on: ubuntu-latest
