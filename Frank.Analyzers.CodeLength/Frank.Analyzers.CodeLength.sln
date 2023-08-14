@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.CodeLength.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.CodeLength.Test", "Frank.Analyzers.CodeLength.Test\Frank.Analyzers.CodeLength.Test.csproj", "{C4D8809E-1393-4E8B-AF8C-153FC6BC4A6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.CodeLength.Vsix", "Frank.Analyzers.CodeLength.Vsix\Frank.Analyzers.CodeLength.Vsix.csproj", "{16297082-E7BE-414F-9001-DC0FE882FD1F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{C4D8809E-1393-4E8B-AF8C-153FC6BC4A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4D8809E-1393-4E8B-AF8C-153FC6BC4A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4D8809E-1393-4E8B-AF8C-153FC6BC4A6E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16297082-E7BE-414F-9001-DC0FE882FD1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16297082-E7BE-414F-9001-DC0FE882FD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16297082-E7BE-414F-9001-DC0FE882FD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16297082-E7BE-414F-9001-DC0FE882FD1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
