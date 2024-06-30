@@ -1,3 +1,12 @@
-# Frank.UblSharp
+# Frank.Analyzers
 
-A fork of UblSharp, (also MIT license), which seems to have ended all development a few years ago
+A collection of Roslyn analyzers, code fixes and code generators.
+
+## Analyzers
+
+### Frank.Analyzers.AutoProperties
+
+[![NuGet](https://img.shields.io/nuget/v/Frank.Analyzers.AutoProperties.svg)](https://www.nuget.org/packages/Frank.Analyzers.AutoProperties)
+[![NuGet](https://img.shields.io/nuget/dt/Frank.Analyzers.AutoProperties.svg)](https://www.nuget.org/packages/Frank.Analyzers.AutoProperties)
+
+This analyzer enforces the use of auto properties when possible.
