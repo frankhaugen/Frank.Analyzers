@@ -75,11 +75,12 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
         var relativePath = GetRelativePath(file, projectDir);
         var directoryPath = relativePath.Replace(Path.GetFileName(relativePath), "");
         var directories = directoryPath.Split('/', StringSplitOptions.RemoveEmptyEntries).ToList();
-        var memberDeclarationSyntax = GenerateEmbeddedResourceProperty(GetMethodName(file), relativePath);
+        // var memberDeclarationSyntax = GenerateEmbeddedResourceProperty(GetMethodName(file), relativePath);
+        var memeberDeclarationSyntaxFileInfo = GenerateFileInformationProperty(GetMethodName(file) + "FileInfo", relativePath);
         
         return new Member
         {
-            MemberDeclarationSyntax = memberDeclarationSyntax,
+            MemberDeclarationSyntax = memeberDeclarationSyntaxFileInfo,
             Directories = directories,
             RelativePath = relativePath
         };
@@ -142,6 +143,35 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
     }
 
     private static string GetRelativePath(AdditionalText additionalText, string projectPath) => Path.GetRelativePath(projectPath, additionalText.Path).Replace("\\", "/");
+    
+    private static PropertyDeclarationSyntax GenerateFileInformationProperty(string name, string relativeAssetFilePath)
+    {
+        var syntaxTree = SyntaxFactory
+            .PropertyDeclaration(
+                SyntaxFactory.ParseTypeName("FileInfo"), name)
+            .WithExpressionBody(
+                SyntaxFactory.ArrowExpressionClause(SyntaxFactory.ObjectCreationExpression(
+                        SyntaxFactory.ParseTypeName("FileInfo"))
+                    .WithArgumentList(
+                        SyntaxFactory.ArgumentList(
+                            SyntaxFactory.SingletonSeparatedList(
+                                SyntaxFactory.Argument(
+                                    SyntaxFactory.LiteralExpression(
+                                        SyntaxKind.StringLiteralExpression,
+                                        SyntaxFactory.Literal(relativeAssetFilePath)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+            .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)))
+            .WithLeadingTrivia(SyntaxFactory.Comment($"/// <summary>FileInfo for {name} with extension {Path.GetExtension(relativeAssetFilePath)}</summary>"))
+            ;
+        return syntaxTree ;
+    }
 
     private static PropertyDeclarationSyntax GenerateEmbeddedResourceProperty(string name, string relativeAssetFilePath)
     {

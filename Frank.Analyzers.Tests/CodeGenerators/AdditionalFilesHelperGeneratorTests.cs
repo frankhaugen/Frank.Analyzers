@@ -19,7 +19,7 @@ public class AdditionalFilesHelperGeneratorTests
     [Fact]
     public void Use()
     {
-        var thing = AdditionalFilesHelper.CodeGenerators.TestingInfrastructure.Files.JsonFiles.Pokemon;
+        var thing = AdditionalFilesHelper.CodeGenerators.TestingInfrastructure.Files.JsonFiles.PokemonFileInfo;
         _outputHelper.WriteLine(thing.Length.ToString());
     }
 
