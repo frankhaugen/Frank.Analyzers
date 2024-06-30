@@ -1,2 +1,3 @@
-# Frank.Analyzers
-A forray into the world of Rosly analyzers and code-fixers
+# Frank.UblSharp
+
+A fork of UblSharp, (also MIT license), which seems to have ended all development a few years ago
