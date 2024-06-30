@@ -25,6 +25,12 @@
 
         <RepositoryUrl>https://www.github.com/frankhaugen/Frank.Analyzers</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
+
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
     </PropertyGroup>
 
     <ItemGroup>

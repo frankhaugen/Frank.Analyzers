@@ -3,6 +3,12 @@
     <PropertyGroup>
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
+
+        <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
+        <EnforceExtendedAnalyzerRules>false</EnforceExtendedAnalyzerRules>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <IsRoslynComponent>false</IsRoslynComponent>
+        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
     </PropertyGroup>
 
     <ItemGroup>

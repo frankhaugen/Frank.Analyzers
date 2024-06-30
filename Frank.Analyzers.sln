@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.AutoProperties", "Frank.Analyzers.AutoProperties\Frank.Analyzers.AutoProperties\Frank.Analyzers.AutoProperties.csproj", "{EA63BBAA-C7E7-42DA-B58B-4FB1089492FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,5 +45,9 @@ Global
 		{6E85E6A9-DBE5-4C88-8727-DBB2DB63E400}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E85E6A9-DBE5-4C88-8727-DBB2DB63E400}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E85E6A9-DBE5-4C88-8727-DBB2DB63E400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA63BBAA-C7E7-42DA-B58B-4FB1089492FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA63BBAA-C7E7-42DA-B58B-4FB1089492FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA63BBAA-C7E7-42DA-B58B-4FB1089492FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA63BBAA-C7E7-42DA-B58B-4FB1089492FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

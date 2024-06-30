@@ -5,11 +5,7 @@
     <PackageTags>SourceGenerator;Roslyn;AdditionalFiles;CSharp;DotNet;Files;HelperClass;ResourceManagement;CodeGeneration;Net8;Microsoft.CodeAnalysis;SourceText;SyntaxFactory;ProjectFiles;CSharp11;ProjectResources;BuildTools;CodebaseAutomation</PackageTags>
     <PackageDescription>Source generator for adding additional files to the compilation.</PackageDescription>
     
-    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-    <InvariantGlobalization>true</InvariantGlobalization>
-    <IsRoslynComponent>true</IsRoslynComponent>
-    <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
+
   </PropertyGroup>
 
   <ItemGroup>
