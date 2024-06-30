@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Bulbasaur",
+    "type": "Grass",
+    "hp": 45
+  },
+  {
+    "name": "Ivysaur",
+    "type": "Grass",
+    "hp": 60
+  }
+]
