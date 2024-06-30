@@ -13,8 +13,7 @@ namespace Frank.Analyzers.AutoProperties;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class AutoPropertySyntaxAnalyzer : DiagnosticAnalyzer
 {
-
-    public Diagnostic Diagnostic = Diagnostic.Create(DiagnosticProvider.AutoPropertyRule, Location.None);
+    private readonly Diagnostic Diagnostic = Diagnostic.Create(DiagnosticProvider.AutoPropertyRule, Location.None);
 
     /// <inheritdoc />
     public override void Initialize(AnalysisContext context)
@@ -34,11 +33,9 @@ public class AutoPropertySyntaxAnalyzer : DiagnosticAnalyzer
         }
 
         context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.PropertyDeclaration);
-        
-        
     }
     
 
     /// <inheritdoc />
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(DiagnosticProvider.AutoPropertyRule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [DiagnosticProvider.AutoPropertyRule];
 }

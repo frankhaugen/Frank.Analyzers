@@ -1,23 +1,20 @@
 using System.Collections.Immutable;
 using System.Composition;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
 
 namespace Frank.Analyzers.AutoProperties;
 
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(AutoPropertyCodeFixProvider)), Shared]
 public class AutoPropertyCodeFixProvider : CodeFixProvider
 {
-    private static Diagnostic Diagnostic = Diagnostic.Create(DiagnosticProvider.AutoPropertyRule, Location.None);
+    private static readonly Diagnostic Diagnostic = Diagnostic.Create(DiagnosticProvider.AutoPropertyRule, Location.None);
 
     public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } = [Diagnostic.Id];
-
+    
     public override FixAllProvider? GetFixAllProvider()
     {
         return FixAllProvider.Create(Fix);
@@ -26,25 +23,28 @@ public class AutoPropertyCodeFixProvider : CodeFixProvider
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
         var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
-        var node = root.FindNode(context.Span);
+        var node = root?.FindNode(context.Span);
         if (node is not PropertyDeclarationSyntax propertyDeclarationSyntax) return;
-        var codeAction = CodeAction.Create("Use auto property", c => Task.FromResult(RenameProperty(context.Document, propertyDeclarationSyntax, c)), Diagnostic.Id);
+        var document = context.Document;
+        var codeAction = CodeAction.Create("Use auto property", async c => await ChangePropertyToAutoPropertyAsync(document, propertyDeclarationSyntax, c), Diagnostic.Id);
         
         context.RegisterCodeFix(codeAction, Diagnostic);
     }
 
-    private Document RenameProperty(Document contextDocument, PropertyDeclarationSyntax propertyDeclarationSyntax, CancellationToken cancellationToken)
+    private async Task<Document> ChangePropertyToAutoPropertyAsync(Document document, PropertyDeclarationSyntax propertyDeclarationSyntax, CancellationToken cancellationToken)
     {
-        var identifierToken = propertyDeclarationSyntax.Identifier;
-        var semanticModel = contextDocument.GetSemanticModelAsync(cancellationToken).Result;
-        var symbol = semanticModel!.GetDeclaredSymbol(propertyDeclarationSyntax, cancellationToken);
-        var newName = identifierToken.Text;
-        var newSolution = Renamer.RenameSymbolAsync(contextDocument.Project.Solution, symbol!, newName, contextDocument.Project.Solution.Workspace.Options, cancellationToken).GetAwaiter().GetResult(); 
-        return newSolution.GetDocument(contextDocument.Id)!;
+        var newProperty = propertyDeclarationSyntax.WithAccessorList(null).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+        var root = await document.GetSyntaxRootAsync(cancellationToken);
+        var newRoot = root?.ReplaceNode(propertyDeclarationSyntax, newProperty);
+        return document.WithSyntaxRoot(newRoot ?? throw new InvalidOperationException($"Failed to replace {propertyDeclarationSyntax} with {newProperty}"));
     }
 
-    private Task<Document?> Fix(FixAllContext arg1, Document arg2, ImmutableArray<Diagnostic> arg3)
+    private async Task<Document?> Fix(FixAllContext arg1, Document arg2, ImmutableArray<Diagnostic> arg3)
     {
-        return null;
+        var root = await arg2.GetSyntaxRootAsync(arg1.CancellationToken).ConfigureAwait(false);
+        var properties = arg3.Select(d => root?.FindNode(d.Location.SourceSpan)).OfType<PropertyDeclarationSyntax>().ToArray();
+        if (properties.Length == 0) return arg2;
+        var newRoot = properties.Aggregate(root, (current, property) => current?.ReplaceNode(property, property.WithAccessorList(null).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))));
+        return arg2.WithSyntaxRoot(newRoot ?? throw new InvalidOperationException("Failed to replace properties"));
     }
 }
