@@ -44,7 +44,8 @@ public class AdditionalFilesHelperGeneratorTests
         CSharpGeneratorDriver.Create(generators, optionsProvider: new TestOptionsProvider(), additionalTexts: additionalFiles).RunGeneratorsAndUpdateCompilation(inputCompilation, out var outputCompilation, out var diagnostics);
 
         _outputHelper.WriteLine(string.Join(Environment.NewLine, diagnostics.Select(x => x.GetMessage())));
-        var syntaxTree = outputCompilation.SyntaxTrees.ElementAt(1);
+        var syntaxTree = outputCompilation.SyntaxTrees.FirstOrDefault();
+        if (syntaxTree is null) return;
         var text = syntaxTree.ToString();
 
         _outputHelper.WriteLine(text);

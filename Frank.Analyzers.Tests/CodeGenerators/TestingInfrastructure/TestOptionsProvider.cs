@@ -10,7 +10,7 @@ internal class TestOptionsProvider : AnalyzerConfigOptionsProvider
     public TestOptionsProvider()
     {
         _options.Add("build_property.rootnamespace", "Frank.GameEngine.Assets");
-        _options.Add("build_property.projectdir", @"C:\repos\frankhaugen\Frank.GameEngine\src\Frank.GameEngine.Assets");
+        _options.Add("build_property.projectdir", $"{GetType().Assembly.Location}");
     }
 
     public override AnalyzerConfigOptions GlobalOptions => _options;
