@@ -1,41 +1,41 @@
-﻿using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using System.Collections.Immutable;
 
-namespace Frank.Analyzers.AutoProperties;
-
-/// <summary>
-/// A sample analyzer that reports the company name being used in class declarations.
-/// Traverses through the Syntax Tree and checks the name (identifier) of each class node.
-/// </summary>
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class AutoPropertySyntaxAnalyzer : DiagnosticAnalyzer
+namespace Frank.Analyzers.AutoProperties
 {
-    private readonly Diagnostic Diagnostic = Diagnostic.Create(DiagnosticProvider.AutoPropertyRule, Location.None);
-
-    /// <inheritdoc />
-    public override void Initialize(AnalysisContext context)
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    public class AutoPropertySyntaxAnalyzer : DiagnosticAnalyzer
     {
-        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-        context.EnableConcurrentExecution();
-        
-        void AnalyzeNode(SyntaxNodeAnalysisContext context)
+        public static readonly DiagnosticDescriptor AutoPropertyRule = new(
+            id: "FR001",
+            title: "Use auto property",
+            messageFormat: "Property '{0}' can be converted to auto-property",
+            category: "Usage",
+            defaultSeverity: DiagnosticSeverity.Warning,
+            isEnabledByDefault: true);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(AutoPropertyRule);
+
+        public override void Initialize(AnalysisContext context)
         {
-            if (context.Node is PropertyDeclarationSyntax propertyDeclarationSyntax)
-            {
-                if (propertyDeclarationSyntax.AccessorList is null)
-                {
-                    context.ReportDiagnostic(Diagnostic);
-                }
-            }
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
+            context.EnableConcurrentExecution();
+            context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.PropertyDeclaration);
         }
 
-        context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.PropertyDeclaration);
-    }
-    
+        private void AnalyzeNode(SyntaxNodeAnalysisContext context)
+        {
+            var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
 
-    /// <inheritdoc />
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [DiagnosticProvider.AutoPropertyRule];
+            if (propertyDeclaration.AccessorList?.Accessors.Count == 2 &&
+                propertyDeclaration.AccessorList.Accessors.All(a => a.Body != null))
+            {
+                var diagnostic = Diagnostic.Create(AutoPropertyRule, propertyDeclaration.GetLocation(), propertyDeclaration.Identifier.Text);
+                context.ReportDiagnostic(diagnostic);
+            }
+        }
+    }
 }
