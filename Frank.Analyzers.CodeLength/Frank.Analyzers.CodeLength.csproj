@@ -1,12 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <IsPackable>false</IsPackable>
-
-        <!-- Avoid ID conflicts with the package project. -->
-        <PackageId>*$(MSBuildProjectFile)*</PackageId>
-        
         <MaxCodeLength>5</MaxCodeLength>
     </PropertyGroup>
 

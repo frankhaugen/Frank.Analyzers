@@ -1,27 +1,22 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
 
 namespace Frank.Analyzers.CodeLength
 {
 	[DiagnosticAnalyzer(LanguageNames.CSharp)]
 	public class FrankAnalyzersCodeLengthAnalyzer : DiagnosticAnalyzer
 	{
-		public const int MaxCodeLine = 50;
-		public const string DiagnosticId = "FA1000";
-		public const string Category = "CodeQuality";
-		public const string Title = "Code length is too long";
-		public const string MessageFormat = "Code-file '{0}' contains more than {1} lines";
-		public const DiagnosticSeverity Severity = DiagnosticSeverity.Error;
-
+		private const int MaxCodeLine = 50;
+		private const string DiagnosticId = "FA1000";
+		private const string Category = "CodeQuality";
+		private const string Title = "Code length is too long";
+		private const string MessageFormat = "Code-file '{0}' contains more than {1} lines";
+		private const DiagnosticSeverity Severity = DiagnosticSeverity.Error;
 		public static readonly DiagnosticDescriptor Rule = new(DiagnosticId, Title, MessageFormat, Category, Severity, true, "Checks the number of lines of code");
+		private Diagnostic CreateDiagnostic(string filePath) => Diagnostic.Create(Rule, Location.None, Path.GetFileNameWithoutExtension(filePath), MaxCodeLine);
 
 		public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-		public Diagnostic CreateDiagnostic(string filePath) => Diagnostic.Create(Rule, Location.None, Path.GetFileNameWithoutExtension(filePath), MaxCodeLine);
-
 		public override void Initialize(AnalysisContext context)
 		{
 			context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze);

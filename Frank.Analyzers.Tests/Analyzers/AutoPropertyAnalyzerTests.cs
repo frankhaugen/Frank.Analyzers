@@ -94,7 +94,5 @@ public class AutoPropertyAnalyzerTests
             NumberOfIncrementalIterations = 1,
             ExpectedDiagnostics = { DiagnosticResult.CompilerWarning("FR001").WithSpan(7, 9, 11, 10).WithArguments("Name") }
         }.RunAsync();
-
-        await VerifyCS.VerifyCodeFixAsync(testCode, fixedCode);
     }
 }
