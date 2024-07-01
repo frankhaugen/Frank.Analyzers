@@ -64,6 +64,25 @@ namespace Frank.Analyzers.AutoProperties
                     c => ChangePropertyToAutoPropertyAsync(context.Document, propertyDeclaration, c),
                     equivalenceKey: Title),
                 diagnostic);
+            
+            var fieldDeclaration = root.FindNode(diagnosticSpan) as FieldDeclarationSyntax;
+            if (fieldDeclaration == null)
+                return;
+            
+            context.RegisterCodeFix(
+                CodeAction.Create(
+                    Title,
+                    c => RemovePrivateFieldAsync(context.Document, fieldDeclaration, c),
+                    equivalenceKey: Title),
+                diagnostic);
+        }
+
+        private Task<Document> RemovePrivateFieldAsync(Document contextDocument, FieldDeclarationSyntax fieldDeclaration, CancellationToken cancellationToken)
+        {
+            var root = contextDocument.GetSyntaxRootAsync(cancellationToken).Result;
+            var newRoot = root?.RemoveNode(fieldDeclaration, SyntaxRemoveOptions.KeepNoTrivia);
+
+            return Task.FromResult(contextDocument.WithSyntaxRoot(newRoot ?? throw new InvalidOperationException("Failed to remove field")));
         }
 
         private async Task<Document> ChangePropertyToAutoPropertyAsync(Document document, PropertyDeclarationSyntax propertyDeclaration, CancellationToken cancellationToken)
