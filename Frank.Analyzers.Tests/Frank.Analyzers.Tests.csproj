@@ -3,10 +3,10 @@
     <PropertyGroup>
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
+        <InvariantGlobalization>true</InvariantGlobalization>
 
         <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
         <EnforceExtendedAnalyzerRules>false</EnforceExtendedAnalyzerRules>
-        <InvariantGlobalization>true</InvariantGlobalization>
         <IsRoslynComponent>false</IsRoslynComponent>
         <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
     </PropertyGroup>
@@ -40,6 +40,10 @@
       <ProjectReference Include="..\Frank.Analyzers.AutoProperties\Frank.Analyzers.AutoProperties.csproj" />
       <ProjectReference Include="..\Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.csproj" />
       <ProjectReference Include="..\Frank.SourceGenerator.AdditionalFiles\Frank.SourceGenerator.AdditionalFiles.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Remove="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" />
     </ItemGroup>
 
     <ItemGroup>

@@ -17,7 +17,7 @@ namespace Frank.Analyzers.AutoProperties
             defaultSeverity: DiagnosticSeverity.Warning,
             isEnabledByDefault: true);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(AutoPropertyRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [AutoPropertyRule];
 
         public override void Initialize(AnalysisContext context)
         {
@@ -29,13 +29,12 @@ namespace Frank.Analyzers.AutoProperties
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
-
-            if (propertyDeclaration.AccessorList?.Accessors.Count == 2 &&
-                propertyDeclaration.AccessorList.Accessors.All(a => a.Body != null))
-            {
-                var diagnostic = Diagnostic.Create(AutoPropertyRule, propertyDeclaration.GetLocation(), propertyDeclaration.Identifier.Text);
-                context.ReportDiagnostic(diagnostic);
-            }
+            var propertyDeclarationWalker = new PropertyDeclarationWalker(context.SemanticModel);
+            
+            propertyDeclarationWalker.Visit(propertyDeclaration);
+            
+            var diagnostics = propertyDeclarationWalker.PropertiesWithBackingFields.Select(propertyWithBackingField => Diagnostic.Create(AutoPropertyRule, propertyWithBackingField.Property.GetLocation(), propertyWithBackingField.Property.Identifier.Text)).ToList();
+            diagnostics.ForEach(context.ReportDiagnostic);
         }
     }
 }
