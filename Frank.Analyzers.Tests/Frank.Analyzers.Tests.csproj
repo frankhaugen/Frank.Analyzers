@@ -5,6 +5,14 @@
         <IsTestProject>true</IsTestProject>
         <InvariantGlobalization>true</InvariantGlobalization>
     </PropertyGroup>
+    
+    <PropertyGroup>
+
+        <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
+        <EnforceExtendedAnalyzerRules>false</EnforceExtendedAnalyzerRules>
+        <IsRoslynComponent>false</IsRoslynComponent>
+        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
+    </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.2">
@@ -12,12 +20,9 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzer.Testing" Version="1.1.2" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" Version="1.1.2" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" Version="1.1.2" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" Version="1.1.2" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" Version="1.1.2" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing.XUnit" Version="1.1.2" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing" Version="1.1.2" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2" />
         <PackageReference Include="VsTools.Projects" Version="1.2.0" PrivateAssets="all" GeneratePathProperty="true" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
