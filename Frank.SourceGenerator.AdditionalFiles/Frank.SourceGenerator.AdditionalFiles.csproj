@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Frank.Analyzers.Core\Frank.Analyzers.Core.csproj" />
   </ItemGroup>
   
+  <ItemGroup>
+    <None Update="tools\*.ps1" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="" />
+    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
 </Project>

@@ -32,7 +32,7 @@
         <IsRoslynComponent>true</IsRoslynComponent>
         <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
         <None Include="../README.md" Pack="true" PackagePath="\" Condition="!Exists('README.md')"/>
