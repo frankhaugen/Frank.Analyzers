@@ -229,8 +229,9 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
     private static string GetMethodName(AdditionalText additionalText)
     {
         var name = Path.GetFileNameWithoutExtension(additionalText.Path);
-        var nameParts = name.Split(".");
-        var methodName = nameParts.Last();
+        var methodNmameForbiddenChars = new[] { ' ', '-', '.', '_' };
+        var cleanName = new string(name.Where(c => !methodNmameForbiddenChars.Contains(c)).ToArray());
+        var methodName = "Get" + char.ToUpper(cleanName[0]) + (cleanName.Length > 1 ? cleanName.Substring(1) : "");
         return methodName;
     }
 }
