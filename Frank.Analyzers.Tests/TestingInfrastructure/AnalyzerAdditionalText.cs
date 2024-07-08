@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Frank.SourceGenerator.AdditionalFiles.Tests;
+namespace Frank.Analyzers.Tests.TestingInfrastructure;
 
 internal class AnalyzerAdditionalText : AdditionalText
 {

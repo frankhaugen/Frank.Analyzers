@@ -4,4 +4,3 @@
 
 | Rule ID | Category | Severity | Notes |
 |---------|----------|----------|-------|
-| FR0001  | Usage    | Error    |       |

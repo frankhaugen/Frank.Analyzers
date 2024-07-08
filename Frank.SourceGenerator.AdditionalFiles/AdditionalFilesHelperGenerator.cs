@@ -9,11 +9,12 @@ using Frank.Analyzers.Core.DiagnosticsProviders;
 
 namespace Frank.SourceGenerator.AdditionalFiles;
 
-[Generator]
+[Generator(LanguageNames.CSharp)]
 public class AdditionalFilesHelperGenerator : ISourceGenerator
 {
     public void Initialize(GeneratorInitializationContext context)
     {
+        // context.RegisterForPostInitialization(initializationContext => initializationContext.AddSource("AdditionalFilesHelper.g.cs", SourceText.From("", Encoding.UTF8)));
     }
 
     public void Execute(GeneratorExecutionContext context)
@@ -28,8 +29,8 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
         var sourceBuilder = new StringBuilder();
         var additionalFiles = context.AdditionalFiles;
 
-        if (TryGetProjectDir(context, out var projectDir)) return;
-        if (TryGetRootNamespace(context, out var rootNamespace)) return;
+        if (!TryGetProjectDir(context, out var projectDir) || projectDir == null) return;
+        if (!TryGetRootNamespace(context, out var rootNamespace) || rootNamespace == null) return;
         
         var root = new ClassMember(rootClassName);
         foreach (var file in additionalFiles)
@@ -124,23 +125,37 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
     
     private static bool TryGetRootNamespace(GeneratorExecutionContext context, out string? rootNamespace)
     {
-        if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.rootnamespace", out rootNamespace))
+        if (context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.rootnamespace", out rootNamespace))
         {
-            context.ReportDiagnostic(new DiagnosticBuilder().WithDescriptor(new FailedToGenerateAdditionalFilesResourceDescriptorProvider().GetDescriptor()).WithLocation(Location.None).Build());
+            return true;
+        }
+        
+        var assemblyName = context.Compilation.AssemblyName;
+        if (assemblyName != null)
+        {
+            rootNamespace = assemblyName;
             return true;
         }
 
+        context.ReportDiagnostic(new DiagnosticBuilder().WithDescriptor(new FailedToGenerateAdditionalFilesResourceDescriptorProvider().GetDescriptor()).WithLocation(Location.None).WithArguments(string.Join(", ", context.AnalyzerConfigOptions.GlobalOptions.Keys)).Build());
         return false;
     }
 
     private static bool TryGetProjectDir(GeneratorExecutionContext context, out string? projectDir)
     {
-        if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.projectdir", out projectDir))
+        if (context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.projectdir", out projectDir))
         {
-            context.ReportDiagnostic(new DiagnosticBuilder().WithDescriptor(new FailedToGenerateAdditionalFilesResourceDescriptorProvider().GetDescriptor()).WithLocation(Location.None).Build());
             return true;
         }
         
+        var currentDirectory = new DirectoryInfo(AppContext.BaseDirectory);
+        if (currentDirectory.Exists)
+        {
+            projectDir = currentDirectory.FullName;
+            return true;
+        }
+        
+        context.ReportDiagnostic(new DiagnosticBuilder().WithDescriptor(new FailedToGenerateAdditionalFilesResourceDescriptorProvider().GetDescriptor()).WithLocation(Location.None).WithArguments(string.Join(", ", context.AnalyzerConfigOptions.GlobalOptions.Keys)).Build());
         return false;
     }
 

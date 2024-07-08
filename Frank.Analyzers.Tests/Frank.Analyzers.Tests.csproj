@@ -4,11 +4,6 @@
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
         <InvariantGlobalization>true</InvariantGlobalization>
-
-        <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
-        <EnforceExtendedAnalyzerRules>false</EnforceExtendedAnalyzerRules>
-        <IsRoslynComponent>false</IsRoslynComponent>
-        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -24,6 +19,7 @@
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing.XUnit" Version="1.1.2" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing" Version="1.1.2" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2" />
+        <PackageReference Include="VsTools.Projects" Version="1.2.0" PrivateAssets="all" GeneratePathProperty="true" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
         <PackageReference Include="xunit" Version="2.8.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1">
@@ -34,6 +30,7 @@
 
     <ItemGroup>
         <Using Include="Xunit"/>
+        <Using Include="Xunit.Abstractions"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -52,17 +49,9 @@
                           ReferenceOutputAssembly="false"
                           PrivateAssets="all" />
     </ItemGroup>
-    
-    <ItemGroup>
-            <Compile Update="**\*.cs">
-                <DesignTime>True</DesignTime>
-                <AutoGen>True</AutoGen>
-            </Compile>
-    </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="CodeGenerators\TestingInfrastructure\Files\**" CopyToOutputDirectory="PreserveNewest" />
-        <EmbeddedResource Include="CodeGenerators\TestingInfrastructure\Files\**" />
+        <AdditionalFiles Include="TestingInfrastructure\Files\**" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
 
 </Project>
