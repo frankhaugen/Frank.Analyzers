@@ -3,13 +3,9 @@
   <PropertyGroup>
     <Description>Source generator for adding additional files to the compilation.</Description>
     <PackageTags>SourceGenerator;Roslyn;AdditionalFiles;CSharp;DotNet;Files;HelperClass;ResourceManagement;CodeGeneration;Net8;Microsoft.CodeAnalysis;SourceText;SyntaxFactory;ProjectFiles;CSharp11;ProjectResources;BuildTools;CodebaseAutomation</PackageTags>
-    <PackageDescription>Source generator for adding additional files to the compilation.</PackageDescription>
-    
-
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" PrivateAssets="all" />
     <PackageReference Include="VsTools.Projects" Version="1.2.0" PrivateAssets="all" GeneratePathProperty="true" />
   </ItemGroup>
 
