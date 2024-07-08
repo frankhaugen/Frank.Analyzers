@@ -46,7 +46,7 @@ public class AdditionalFilesHelperGeneratorTests : CSharpSourceGeneratorTest<Add
                 }
             }");
 
-        TestState.GeneratedSources.Add(("Frank.SourceGenerator.AdditionalFiles\\Frank.SourceGenerator.AdditionalFiles.AdditionalFilesHelperGenerator\\AdditionalFilesHelper.g.cs", SourceText.From(
+        TestState.GeneratedSources.Add(("Frank.SourceGenerator.AdditionalFiles\\Frank.SourceGenerator.AdditionalFiles.AdditionalFilesHelperGenerator\\AdditionalFilesHelper.g.cs".ReplaceLineEndings(), SourceText.From(
             """
             using System.Reflection;
             using System.IO;
