@@ -1,6 +1,6 @@
-﻿namespace Frank.Analyzers.Core;
+﻿namespace Frank.Analyzers.CodeLength.Internals;
 
-public class DiagnosticIdBuilder
+internal class DiagnosticIdBuilder
 {
     private string _prefix = Constants.DiagnosticPrefix;
     private DiagnosticCategories? _category;

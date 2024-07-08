@@ -11,10 +11,6 @@
         </PackageReference>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" />
     </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Frank.Analyzers.Core\Frank.Analyzers.Core.csproj" />
-    </ItemGroup>
     
     <ItemGroup>
         <None Update="tools\*.ps1" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="" />

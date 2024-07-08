@@ -1,6 +1,7 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using Frank.SourceGenerator.AdditionalFiles.Internals;
+using Microsoft.CodeAnalysis;
 
-namespace Frank.Analyzers.Core.DiagnosticsProviders;
+namespace Frank.SourceGenerator.AdditionalFiles;
 
 public class FailedToGenerateAdditionalFilesResourceDescriptorProvider : IDiagnosticDescriptorProvider
 {

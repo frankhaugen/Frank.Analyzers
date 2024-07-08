@@ -1,6 +1,7 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using Frank.Analyzers.CodeLength.Internals;
+using Microsoft.CodeAnalysis;
 
-namespace Frank.Analyzers.Core.DiagnosticsProviders;
+namespace Frank.Analyzers.CodeLength;
 
 public class TooManyLinesInClassDescriptorProvider : IDiagnosticDescriptorProvider
 {

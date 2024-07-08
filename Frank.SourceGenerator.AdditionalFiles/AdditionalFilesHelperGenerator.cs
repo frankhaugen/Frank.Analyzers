@@ -4,8 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using System.Text;
 using System.Text.RegularExpressions;
-using Frank.Analyzers.Core;
-using Frank.Analyzers.Core.DiagnosticsProviders;
+using Frank.SourceGenerator.AdditionalFiles.Internals;
 
 namespace Frank.SourceGenerator.AdditionalFiles;
 

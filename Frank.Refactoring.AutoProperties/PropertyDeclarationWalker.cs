@@ -1,9 +1,9 @@
-﻿using Frank.Analyzers.Core;
+﻿using Frank.Refactoring.AutoProperties.Internals;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Frank.Analyzers.AutoProperties;
+namespace Frank.Refactoring.AutoProperties;
 
 public class PropertyDeclarationWalker(SemanticModel semanticModel) : CSharpSyntaxWalker
 {

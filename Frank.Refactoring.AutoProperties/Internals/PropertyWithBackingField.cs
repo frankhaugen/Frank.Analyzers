@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Frank.Analyzers.Core;
+namespace Frank.Refactoring.AutoProperties.Internals;
 
 public class PropertyWithBackingField
 {

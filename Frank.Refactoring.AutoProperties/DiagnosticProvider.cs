@@ -1,6 +1,6 @@
 using Microsoft.CodeAnalysis;
 
-namespace Frank.Analyzers.AutoProperties;
+namespace Frank.Refactoring.AutoProperties;
 
 internal static class DiagnosticProvider
 {

@@ -1,12 +1,12 @@
 ﻿using System.Composition;
-using Frank.Analyzers.Core.SyntaxRewriters;
+using Frank.Refactoring.AutoProperties.Internals;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Frank.Analyzers.AutoProperties;
+namespace Frank.Refactoring.AutoProperties;
 
 [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = nameof(ConvertToAutoPropertyCodeRefactoringProvider)), Shared]
 public class ConvertToAutoPropertyCodeRefactoringProvider : CodeRefactoringProvider

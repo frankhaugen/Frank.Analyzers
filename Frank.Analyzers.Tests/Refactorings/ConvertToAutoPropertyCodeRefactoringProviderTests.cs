@@ -1,4 +1,4 @@
-﻿using Frank.Analyzers.AutoProperties;
+﻿using Frank.Refactoring.AutoProperties;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing;
 

@@ -1,5 +1,5 @@
-﻿using Frank.Analyzers.AutoProperties;
-using Frank.Analyzers.Tests.TestingInfrastructure;
+﻿using Frank.Analyzers.Tests.TestingInfrastructure;
+using Frank.Refactoring.AutoProperties;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp;

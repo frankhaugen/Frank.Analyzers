@@ -1,8 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
 
-namespace Frank.Analyzers.Core;
+namespace Frank.Refactoring.AutoProperties.Internals;
 
-public class DiagnosticBuilder
+internal class DiagnosticBuilder
 {
     private DiagnosticDescriptor? _descriptor;
     private Location? _location;

@@ -2,15 +2,13 @@
 
   <PropertyGroup>
     <Description>Source generator for adding additional files to the compilation.</Description>
-    <PackageTags>SourceGenerator;Roslyn;AdditionalFiles;CSharp;DotNet;Files;HelperClass;ResourceManagement;CodeGeneration;Net8;Microsoft.CodeAnalysis;SourceText;SyntaxFactory;ProjectFiles;CSharp11;ProjectResources;BuildTools;CodebaseAutomation</PackageTags>
+    <PackageTags>SourceGenerator;Roslyn;AdditionalFiles;CSharp;DotNet;Files;HelperClass;ResourceManagement;CodeGeneration;Net8;Microsoft.CodeAnalysis;SourceText;SyntaxFactory;ProjectFiles;ProjectResources;BuildTools;CodebaseAutomation</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.10.0" />
     <PackageReference Include="VsTools.Projects" Version="1.2.0" PrivateAssets="all" GeneratePathProperty="true" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Frank.Analyzers.Core\Frank.Analyzers.Core.csproj" />
   </ItemGroup>
   
   <ItemGroup>

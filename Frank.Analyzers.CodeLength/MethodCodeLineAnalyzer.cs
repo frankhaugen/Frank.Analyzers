@@ -1,7 +1,5 @@
 ﻿using System.Collections.Immutable;
-using System.Data;
-using Frank.Analyzers.Core;
-using Frank.Analyzers.Core.DiagnosticsProviders;
+using Frank.Analyzers.CodeLength.Internals;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 

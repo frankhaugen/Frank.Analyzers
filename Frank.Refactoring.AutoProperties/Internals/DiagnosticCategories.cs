@@ -1,9 +1,9 @@
-namespace Frank.Analyzers.Core;
+namespace Frank.Refactoring.AutoProperties.Internals;
 
 /// <summary>
 /// Represents the categories that can be assigned to diagnostics.
 /// </summary>
-public enum DiagnosticCategories
+internal enum DiagnosticCategories
 {
     Usage = 1,
     Naming = 2,

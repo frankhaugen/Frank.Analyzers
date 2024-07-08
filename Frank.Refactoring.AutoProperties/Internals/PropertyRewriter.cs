@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 
-namespace Frank.Analyzers.Core.SyntaxRewriters;
+namespace Frank.Refactoring.AutoProperties.Internals;
 
 public class PropertyRewriter : CSharpSyntaxRewriter
 {
