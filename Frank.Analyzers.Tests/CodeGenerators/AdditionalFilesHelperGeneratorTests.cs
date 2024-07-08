@@ -45,8 +45,13 @@ public class AdditionalFilesHelperGeneratorTests : CSharpSourceGeneratorTest<Add
                     }
                 }
             }");
+        
+        var unixPath = "Frank.SourceGenerator.AdditionalFiles/Frank.SourceGenerator.AdditionalFiles.AdditionalFilesHelperGenerator/AdditionalFilesHelper.g.cs";
+        var windowsPath = "Frank.SourceGenerator.AdditionalFiles\\Frank.SourceGenerator.AdditionalFiles.AdditionalFilesHelperGenerator\\AdditionalFilesHelper.g.cs";
+        
+        var path = Environment.OSVersion.Platform == PlatformID.Win32NT ? windowsPath : unixPath;
 
-        TestState.GeneratedSources.Add(("Frank.SourceGenerator.AdditionalFiles\\Frank.SourceGenerator.AdditionalFiles.AdditionalFilesHelperGenerator\\AdditionalFilesHelper.g.cs".ReplaceLineEndings(), SourceText.From(
+        TestState.GeneratedSources.Add((path, SourceText.From(
             """
             using System.Reflection;
             using System.IO;
@@ -62,7 +67,7 @@ public class AdditionalFilesHelperGeneratorTests : CSharpSourceGeneratorTest<Add
                     }
                 }
             }
-            """.ReplaceLineEndings(),
+            """,
             Encoding.UTF8
             )));
         
