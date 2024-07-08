@@ -51,10 +51,10 @@ public class AdditionalFilesHelperGeneratorTests : CSharpSourceGeneratorTest<Add
         
         var path = Environment.OSVersion.Platform == PlatformID.Win32NT ? windowsPath : unixPath;
 
-        var unixNewLine = "\n";
-        var windowsNewLine = "\r\n";
+        // var unixNewLine = "\n";
+        // var windowsNewLine = "\r\n";
         
-        var newLine = Environment.OSVersion.Platform == PlatformID.Win32NT ? windowsNewLine : unixNewLine;
+        // var newLine = Environment.OSVersion.Platform == PlatformID.Win32NT ? windowsNewLine : unixNewLine;
         
         TestState.GeneratedSources.Add((path, SourceText.From(
             """
@@ -72,7 +72,7 @@ public class AdditionalFilesHelperGeneratorTests : CSharpSourceGeneratorTest<Add
                     }
                 }
             }
-            """.ReplaceLineEndings(newLine),
+            """.ReplaceLineEndings("\n"),
             Encoding.UTF8
             )));
         
