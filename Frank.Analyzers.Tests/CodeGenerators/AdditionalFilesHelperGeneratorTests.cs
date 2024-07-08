@@ -72,7 +72,7 @@ public class AdditionalFilesHelperGeneratorTests : CSharpSourceGeneratorTest<Add
                     }
                 }
             }
-            """.ReplaceLineEndings("\n"),
+            """.ReplaceLineEndings("\r\n"),
             Encoding.UTF8
             )));
         
