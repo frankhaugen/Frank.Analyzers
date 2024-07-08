@@ -5,6 +5,7 @@
         <IsRoslynComponent>true</IsRoslynComponent>
         <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
         <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
+        <RootNamespace>Frank.Analyzers.AutoProperties</RootNamespace>
     </PropertyGroup>
 
 

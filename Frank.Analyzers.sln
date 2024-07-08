@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.AutoProperties", "Frank.Analyzers.AutoProperties\Frank.Analyzers.AutoProperties.csproj", "{EA63BBAA-C7E7-42DA-B58B-4FB1089492FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Refactoring.AutoProperties", "Frank.Refactoring.AutoProperties\Frank.Refactoring.AutoProperties.csproj", "{EA63BBAA-C7E7-42DA-B58B-4FB1089492FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frank.Analyzers.Core", "Frank.Analyzers.Core\Frank.Analyzers.Core.csproj", "{5AD2169F-A455-4405-955D-53EB299D879B}"
 EndProject

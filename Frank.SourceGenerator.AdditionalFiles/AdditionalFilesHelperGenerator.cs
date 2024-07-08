@@ -4,6 +4,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using System.Text;
 using System.Text.RegularExpressions;
+using Frank.Analyzers.Core;
+using Frank.Analyzers.Core.DiagnosticsProviders;
 
 namespace Frank.SourceGenerator.AdditionalFiles;
 
@@ -124,7 +126,7 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
     {
         if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.rootnamespace", out rootNamespace))
         {
-            context.ReportDiagnostic(Diagnostic.Create(new DiagnosticDescriptor("FRANK0002", "Failed to generate resource helper class, no root", "Failed to generate resource helper class, no root", "Frank", DiagnosticSeverity.Error, true), Location.None));
+            context.ReportDiagnostic(new DiagnosticBuilder().WithDescriptor(new FailedToGenerateAdditionalFilesResourceDescriptorProvider().GetDescriptor()).WithLocation(Location.None).Build());
             return true;
         }
 
@@ -135,7 +137,7 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
     {
         if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.projectdir", out projectDir))
         {
-            context.ReportDiagnostic(Diagnostic.Create(new DiagnosticDescriptor("FRANK0001", "Failed to generate resource helper class", "Failed to generate resource helper class", "Frank", DiagnosticSeverity.Error, true), Location.None));
+            context.ReportDiagnostic(new DiagnosticBuilder().WithDescriptor(new FailedToGenerateAdditionalFilesResourceDescriptorProvider().GetDescriptor()).WithLocation(Location.None).Build());
             return true;
         }
         

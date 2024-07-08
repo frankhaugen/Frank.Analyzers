@@ -37,7 +37,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Frank.Analyzers.AutoProperties\Frank.Analyzers.AutoProperties.csproj" />
+      <ProjectReference Include="..\Frank.Refactoring.AutoProperties\Frank.Refactoring.AutoProperties.csproj" />
       <ProjectReference Include="..\Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.csproj" />
       <ProjectReference Include="..\Frank.SourceGenerator.AdditionalFiles\Frank.SourceGenerator.AdditionalFiles.csproj" />
     </ItemGroup>

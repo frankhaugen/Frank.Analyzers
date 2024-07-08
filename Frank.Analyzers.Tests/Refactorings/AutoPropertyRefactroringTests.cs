@@ -30,7 +30,7 @@ public class AutoPropertyRefactroringTests : CodeRefactoringProviderTestFixture
                     using System.Text;
                     using System.Threading.Tasks;
                     
-                    namespace Frank.Analyzers.AutoProperties
+                    namespace Frank.Refactoring.AutoProperties
                     {
                         public class AutoPropertyRefactor
                         {
@@ -52,7 +52,7 @@ public class AutoPropertyRefactroringTests : CodeRefactoringProviderTestFixture
                         using System.Text;
                         using System.Threading.Tasks;
                         
-                        namespace Frank.Analyzers.AutoProperties
+                        namespace Frank.Refactoring.AutoProperties
                         {
                             public class AutoPropertyRefactor
                             {
@@ -75,7 +75,7 @@ public class AutoPropertyRefactroringTests : CodeRefactoringProviderTestFixture
                     using System.Text;
                     using System.Threading.Tasks;
                     
-                    namespace Frank.Analyzers.AutoProperties
+                    namespace Frank.Refactoring.AutoProperties
                     {
                         public class AutoPropertyRefactor
                         {
@@ -97,7 +97,7 @@ public class AutoPropertyRefactroringTests : CodeRefactoringProviderTestFixture
                         using System.Text;
                         using System.Threading.Tasks;
                         
-                        namespace Frank.Analyzers.AutoProperties
+                        namespace Frank.Refactoring.AutoProperties
                         {
                             public class AutoPropertyRefactor
                             {
