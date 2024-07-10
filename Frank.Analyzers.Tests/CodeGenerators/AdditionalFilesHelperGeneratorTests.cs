@@ -67,8 +67,8 @@ public class AdditionalFilesHelperGeneratorTests : CSharpSourceGeneratorTest<Add
                 {
                     public static class Assets
                     {
-                        /// <summary>FileInfo for TeapotFileInfo with extension .obj</summary>
-                        public static FileInfo TeapotFileInfo => new FileInfo("Assets/Teapot.obj");
+                        /// <summary>FileInfo for Teapot with extension .obj</summary>
+                        public static FileInfo GetTeapot() => new FileInfo("Assets/Teapot.obj");
                     }
                 }
             }
