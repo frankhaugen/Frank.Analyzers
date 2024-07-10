@@ -1,6 +1,8 @@
-﻿using ClangSharp;
+﻿using System.Text;
+using ClangSharp;
 using ClangSharp.Interop;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
 using Diagnostic = Microsoft.CodeAnalysis.Diagnostic;
 
 namespace Frank.SourceGenerators.CppInteropts
@@ -57,7 +59,13 @@ namespace Frank.SourceGenerators.CppInteropts
                 Console.WriteLine(diagnostic.ToString());
             }
             
-            // context.AddSource(Path.GetFileNameWithoutExtension(filePath) + ".g.cs", SourceText.From(generatedCode, Encoding.UTF8));
+            var outputFilePath = Path.Combine("Bullet3Interop", Path.GetFileNameWithoutExtension(filePath) + ".g.cs");
+            
+#pragma warning disable RS1035
+            var generatedCode = File.ReadAllText(outputFilePath);
+#pragma warning restore RS1035
+            
+            context.AddSource(Path.GetFileNameWithoutExtension(filePath) + ".g.cs", SourceText.From(generatedCode, Encoding.UTF8));
         }
     }
 }
