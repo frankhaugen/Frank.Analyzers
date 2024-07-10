@@ -32,19 +32,6 @@ public class CountriesEnumerableGenerator : ISourceGenerator
     
     private ClassDeclarationSyntax GenerateEnumerable(IEnumerable<RegionInfo> allRegions)
     {
-        var countryMethods = allRegions.DistinctBy(x => x.EnglishName).Select(region =>
-        {
-            var methodName = $"Get{Internals.NameHelper.MakeTypeFriendlyName(region.EnglishName)}";
-            return SyntaxFactory.MethodDeclaration(SyntaxFactory.IdentifierName("ICountryInfo"), SyntaxFactory.Identifier(methodName))
-                .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)))
-                .WithExpressionBody(SyntaxFactory.ArrowExpressionClause(
-                    SyntaxFactory.ObjectCreationExpression(SyntaxFactory.IdentifierName(Internals.NameHelper.MakeTypeFriendlyName(region.EnglishName)))
-                    .WithArgumentList(SyntaxFactory.ArgumentList())
-                ))
-                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
-        }).ToArray();
-        
-        // public static Countries Instance { get; } = new Countries();
         var staticInstanceProperty = SyntaxFactory.PropertyDeclaration(SyntaxFactory.IdentifierName("Countries"), SyntaxFactory.Identifier("Instance"))
             .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)))
             .WithInitializer(SyntaxFactory.EqualsValueClause(
@@ -53,38 +40,6 @@ public class CountriesEnumerableGenerator : ISourceGenerator
             ))
             .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
         
-        // public ICountryInfo GetCountry(Country country) => this.First(x => x.CountryCode == country);
-        var getCountryByCountryEnumMethod = SyntaxFactory.MethodDeclaration(SyntaxFactory.IdentifierName("ICountryInfo"), SyntaxFactory.Identifier("GetCountry"))
-            .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
-            .WithParameterList(SyntaxFactory.ParameterList(
-                SyntaxFactory.SingletonSeparatedList(
-                    SyntaxFactory.Parameter(SyntaxFactory.Identifier("country"))
-                        .WithType(SyntaxFactory.ParseTypeName("Country"))
-                )
-            ))
-            .WithExpressionBody(SyntaxFactory.ArrowExpressionClause(
-                SyntaxFactory.InvocationExpression(SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                    SyntaxFactory.IdentifierName("this"),
-                    SyntaxFactory.IdentifierName("First")
-                ))
-                    // x => x.CountryCode == country
-                    .WithArgumentList(SyntaxFactory.ArgumentList(
-                        SyntaxFactory.SingletonSeparatedList(
-                            SyntaxFactory.Argument(SyntaxFactory.ParenthesizedLambdaExpression(
-                                SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression,
-                                    SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                                        SyntaxFactory.IdentifierName("x"),
-                                        SyntaxFactory.IdentifierName("CountryCode")
-                                    ),
-                                    SyntaxFactory.IdentifierName("country")
-                                )
-                            ))
-                        )
-                    ))
-            ))
-            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
-        
-        // public ICountryInfo this[Country index] => Instance.First(x => x.CountryCode == index);
         var indexerMethod = SyntaxFactory.IndexerDeclaration(SyntaxFactory.IdentifierName("ICountryInfo"))
             .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
             .WithParameterList(SyntaxFactory.BracketedParameterList(
@@ -98,19 +53,29 @@ public class CountriesEnumerableGenerator : ISourceGenerator
                     SyntaxFactory.IdentifierName("Instance"),
                     SyntaxFactory.IdentifierName("First")
                 ))
-                    .WithArgumentList(SyntaxFactory.ArgumentList(
+                .WithArgumentList(
+                    SyntaxFactory.ArgumentList(
                         SyntaxFactory.SingletonSeparatedList(
-                            SyntaxFactory.Argument(SyntaxFactory.ParenthesizedLambdaExpression(
-                                SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression,
-                                    SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                                        SyntaxFactory.IdentifierName("x"),
-                                        SyntaxFactory.IdentifierName("CountryCode")
-                                    ),
-                                    SyntaxFactory.IdentifierName("index")
+                            SyntaxFactory.Argument(
+                                SyntaxFactory.SimpleLambdaExpression(
+                                    SyntaxFactory.Parameter(
+                                        SyntaxFactory.Identifier("x")
+                                    )
+                                ).WithExpressionBody(
+                                    SyntaxFactory.BinaryExpression(
+                                        SyntaxKind.EqualsExpression,
+                                        SyntaxFactory.MemberAccessExpression(
+                                            SyntaxKind.SimpleMemberAccessExpression,
+                                            SyntaxFactory.IdentifierName("x"),
+                                            SyntaxFactory.IdentifierName("CountryCode")
+                                        ),
+                                        SyntaxFactory.IdentifierName("index")
+                                    )
                                 )
-                            ))
+                            )
                         )
-                    ))
+                    )
+                )
             ))
             .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
 
@@ -128,6 +93,18 @@ public class CountriesEnumerableGenerator : ISourceGenerator
                     .WithArgumentList(SyntaxFactory.ArgumentList())
                 )).ToArray()
             ));
+
+        var countryMethods = allRegions.DistinctBy(x => x.EnglishName).Select(region =>
+        {
+            var methodName = $"Get{Internals.NameHelper.MakeTypeFriendlyName(region.EnglishName)}";
+            return SyntaxFactory.MethodDeclaration(SyntaxFactory.IdentifierName("ICountryInfo"), SyntaxFactory.Identifier(methodName))
+                .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)))
+                .WithExpressionBody(SyntaxFactory.ArrowExpressionClause(
+                    SyntaxFactory.ObjectCreationExpression(SyntaxFactory.IdentifierName(Internals.NameHelper.MakeTypeFriendlyName(region.EnglishName)))
+                        .WithArgumentList(SyntaxFactory.ArgumentList())
+                ))
+                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+        }).ToArray();
 
         var explicitGetEnumeratorMethod = SyntaxFactory.MethodDeclaration(SyntaxFactory.IdentifierName("IEnumerator"), SyntaxFactory.Identifier("GetEnumerator"))
             .WithExplicitInterfaceSpecifier(SyntaxFactory.ExplicitInterfaceSpecifier(SyntaxFactory.IdentifierName("IEnumerable")))
@@ -148,11 +125,10 @@ public class CountriesEnumerableGenerator : ISourceGenerator
             .WithMembers(SyntaxList.Create<MemberDeclarationSyntax>(
                 new MemberDeclarationSyntax[]
                 {
-                    getCountryByCountryEnumMethod,
                     staticInstanceProperty,
                     indexerMethod,
+                    explicitGetEnumeratorMethod,
                     getEnumeratorMethod,
-                    explicitGetEnumeratorMethod
                 }.Concat(countryMethods).ToArray()
             ));
     }
