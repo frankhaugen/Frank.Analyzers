@@ -78,11 +78,11 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
         var directoryPath = relativePath.Replace(Path.GetFileName(relativePath), "");
         var directories = directoryPath.Split('/', StringSplitOptions.RemoveEmptyEntries).ToList();
         // var memberDeclarationSyntax = GenerateEmbeddedResourceProperty(GetMethodName(file), relativePath);
-        var memeberDeclarationSyntaxFileInfo = GenerateFileInformationProperty(GetMethodName(file) + "FileInfo", relativePath);
+        var memberDeclarationSyntaxFileInfo = GenerateFileInformationProperty(GetMethodName(file), relativePath);
         
         return new Member
         {
-            MemberDeclarationSyntax = memeberDeclarationSyntaxFileInfo,
+            MemberDeclarationSyntax = memberDeclarationSyntaxFileInfo,
             Directories = directories,
             RelativePath = relativePath
         };
@@ -160,11 +160,11 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
 
     private static string GetRelativePath(AdditionalText additionalText, string projectPath) => Path.GetRelativePath(projectPath, additionalText.Path).Replace("\\", "/");
     
-    private static PropertyDeclarationSyntax GenerateFileInformationProperty(string name, string relativeAssetFilePath)
+    private static MethodDeclarationSyntax GenerateFileInformationProperty(string name, string relativeAssetFilePath)
     {
         var syntaxTree = SyntaxFactory
-            .PropertyDeclaration(
-                SyntaxFactory.ParseTypeName("FileInfo"), name)
+            .MethodDeclaration(
+                SyntaxFactory.ParseTypeName("FileInfo"), "Get" + name)
             .WithExpressionBody(
                 SyntaxFactory.ArrowExpressionClause(SyntaxFactory.ObjectCreationExpression(
                         SyntaxFactory.ParseTypeName("FileInfo"))
@@ -189,35 +189,6 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
         return syntaxTree ;
     }
 
-    private static PropertyDeclarationSyntax GenerateEmbeddedResourceProperty(string name, string relativeAssetFilePath)
-    {
-        var syntaxTree = SyntaxFactory
-            .PropertyDeclaration(
-                SyntaxFactory.ParseTypeName("byte[]"), name)
-            .WithExpressionBody(
-                SyntaxFactory.ArrowExpressionClause(SyntaxFactory.InvocationExpression(
-                        SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName("File"), SyntaxFactory.IdentifierName("ReadAllBytes"))
-                    ).WithArgumentList(
-                        SyntaxFactory.ArgumentList(
-                            SyntaxFactory.SingletonSeparatedList(
-                                SyntaxFactory.Argument(
-                                    SyntaxFactory.LiteralExpression(
-                                        SyntaxKind.StringLiteralExpression,
-                                        SyntaxFactory.Literal(relativeAssetFilePath)
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-            .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)))
-            .WithLeadingTrivia(SyntaxFactory.Comment($"/// <summary>Embedded resource {name} with extension {Path.GetExtension(relativeAssetFilePath)}</summary>"))
-            ;
-        return syntaxTree ;
-    }
-
     private static string ConvertPathToClassName(string path)
     {
         var className = Path.GetFileName(path);
@@ -231,7 +202,7 @@ public class AdditionalFilesHelperGenerator : ISourceGenerator
         var name = Path.GetFileNameWithoutExtension(additionalText.Path);
         var methodNmameForbiddenChars = new[] { ' ', '-', '.', '_' };
         var cleanName = new string(name.Where(c => !methodNmameForbiddenChars.Contains(c)).ToArray());
-        var methodName = "Get" + char.ToUpper(cleanName[0]) + (cleanName.Length > 1 ? cleanName.Substring(1) : "");
+        var methodName = char.ToUpper(cleanName[0]) + (cleanName.Length > 1 ? cleanName.Substring(1) : "");
         return methodName;
     }
 }

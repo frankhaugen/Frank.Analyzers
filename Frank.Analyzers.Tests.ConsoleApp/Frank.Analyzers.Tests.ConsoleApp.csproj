@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+<!--        <ProjectReference Include="..\Frank.SourceGenerator.AdditionalFiles\Frank.SourceGenerator.AdditionalFiles.csproj"-->
+<!--                          OutputItemType="Analyzer"-->
+<!--                          ReferenceOutputAssembly="false"-->
+<!--                          PrivateAssets="all"/>-->
+        <ProjectReference Include="..\Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false"
+                          PrivateAssets="all"/>
+        <ProjectReference Include="..\Frank.Refactoring.AutoProperties\Frank.Refactoring.AutoProperties.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false"
+                          PrivateAssets="all"/>
+<!--        <ProjectReference Include="..\Frank.SourceGenerators.CppInteropts\Frank.SourceGenerators.CppInteropts.csproj"-->
+<!--                          OutputItemType="Analyzer"-->
+<!--                          ReferenceOutputAssembly="false"-->
+<!--                          PrivateAssets="all"/>-->
+        <ProjectReference Include="..\Frank.SourceGenerators.Localization\Frank.SourceGenerators.Localization.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false"
+                          PrivateAssets="all"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="assets\**\*.h" CopyToOutputDirectory="PreserveNewest"/>
+        <!--        <AdditionalFiles Include="assets\**\*.c" CopyToOutputDirectory="PreserveNewest" />-->
+        <!--        <AdditionalFiles Include="assets\**\*.cpp" CopyToOutputDirectory="PreserveNewest" />-->
+    </ItemGroup>
+
+</Project>

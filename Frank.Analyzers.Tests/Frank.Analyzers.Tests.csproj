@@ -7,7 +7,6 @@
     </PropertyGroup>
     
     <PropertyGroup>
-
         <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
         <EnforceExtendedAnalyzerRules>false</EnforceExtendedAnalyzerRules>
         <IsRoslynComponent>false</IsRoslynComponent>
