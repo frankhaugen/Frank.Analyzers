@@ -30,7 +30,7 @@ public class CountriesEnumerableGenerator : ISourceGenerator
         context.AddSource("Countries.g.cs", TypeDeclarationHelper.PrepareTypeDeclarationSyntax(enumerableSource, rootNamespace));
     }
     
-    private ClassDeclarationSyntax GenerateEnumerable(IEnumerable<RegionInfo> allRegions)
+    private ClassDeclarationSyntax GenerateEnumerable(RegionInfo[] allRegions)
     {
         var staticInstanceProperty = SyntaxFactory.PropertyDeclaration(SyntaxFactory.IdentifierName("Countries"), SyntaxFactory.Identifier("Instance"))
             .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)))
@@ -38,7 +38,8 @@ public class CountriesEnumerableGenerator : ISourceGenerator
                 SyntaxFactory.ObjectCreationExpression(SyntaxFactory.IdentifierName("Countries"))
                     .WithArgumentList(SyntaxFactory.ArgumentList())
             ))
-            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+            .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
         
         var indexerMethod = SyntaxFactory.IndexerDeclaration(SyntaxFactory.IdentifierName("ICountryInfo"))
             .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
@@ -77,7 +78,9 @@ public class CountriesEnumerableGenerator : ISourceGenerator
                     )
                 )
             ))
-            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+            .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)
+            ;
 
         var getEnumeratorMethod = SyntaxFactory.MethodDeclaration(
                 SyntaxFactory.GenericName("IEnumerator")
@@ -88,19 +91,19 @@ public class CountriesEnumerableGenerator : ISourceGenerator
             .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
             .WithBody(SyntaxFactory.Block(
                 allRegions.Select(region => SyntaxFactory.YieldStatement(SyntaxKind.YieldReturnStatement,
-                    SyntaxFactory.InvocationExpression(SyntaxFactory.IdentifierName($"Get{Internals.NameHelper.MakeTypeFriendlyName(region.EnglishName)}"))
+                    SyntaxFactory.InvocationExpression(SyntaxFactory.IdentifierName($"Get{NameHelper.MakeTypeFriendlyName(region.EnglishName)}"))
                         .WithArgumentList(SyntaxFactory.ArgumentList())
                     .WithArgumentList(SyntaxFactory.ArgumentList())
-                )).ToArray()
+                ))
             ));
 
         var countryMethods = allRegions.DistinctBy(x => x.EnglishName).Select(region =>
         {
-            var methodName = $"Get{Internals.NameHelper.MakeTypeFriendlyName(region.EnglishName)}";
+            var methodName = $"Get{NameHelper.MakeTypeFriendlyName(region.EnglishName)}";
             return SyntaxFactory.MethodDeclaration(SyntaxFactory.IdentifierName("ICountryInfo"), SyntaxFactory.Identifier(methodName))
                 .WithModifiers(SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.PublicKeyword), SyntaxFactory.Token(SyntaxKind.StaticKeyword)))
                 .WithExpressionBody(SyntaxFactory.ArrowExpressionClause(
-                    SyntaxFactory.ObjectCreationExpression(SyntaxFactory.IdentifierName(Internals.NameHelper.MakeTypeFriendlyName(region.EnglishName)))
+                    SyntaxFactory.ObjectCreationExpression(SyntaxFactory.IdentifierName(NameHelper.MakeTypeFriendlyName(region.EnglishName)))
                         .WithArgumentList(SyntaxFactory.ArgumentList())
                 ))
                 .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
