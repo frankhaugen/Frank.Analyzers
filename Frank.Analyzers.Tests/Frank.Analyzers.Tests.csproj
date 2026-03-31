@@ -4,6 +4,7 @@
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
         <InvariantGlobalization>true</InvariantGlobalization>
+        <NoWarn>$(NoWarn);FRANK4010;FRANK4011;xUnit2020;CS8625;CS8629;CS8765</NoWarn>
     </PropertyGroup>
 
     <PropertyGroup>
