@@ -6,6 +6,7 @@
     </PropertyGroup>
     
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
         <PackageReference Include="ClangSharp.PInvokeGenerator" Version="18.1.0" />
     </ItemGroup>
 
@@ -27,6 +28,10 @@
                           ReferenceOutputAssembly="false"
                           PrivateAssets="all"/>
         <ProjectReference Include="..\Frank.SourceGenerators.Localization\Frank.SourceGenerators.Localization.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false"
+                          PrivateAssets="all"/>
+        <ProjectReference Include="..\Frank.Analyzers.AutoMapper\Frank.Analyzers.AutoMapper.csproj"
                           OutputItemType="Analyzer"
                           ReferenceOutputAssembly="false"
                           PrivateAssets="all"/>

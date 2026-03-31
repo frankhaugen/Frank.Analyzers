@@ -5,7 +5,7 @@
         <IsTestProject>true</IsTestProject>
         <InvariantGlobalization>true</InvariantGlobalization>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
         <EnforceExtendedAnalyzerRules>false</EnforceExtendedAnalyzerRules>
@@ -15,20 +15,20 @@
 
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.2">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.CodeAnalysis.Analyzer.Testing" Version="1.1.2" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" Version="1.1.2" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" Version="1.1.2" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing.XUnit" Version="1.1.2" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2" />
-        <PackageReference Include="VsTools.Projects" Version="1.2.0" PrivateAssets="all" GeneratePathProperty="true" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
-        <PackageReference Include="xunit" Version="2.8.1" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzer.Testing" Version="1.1.2"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" Version="1.1.2"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" Version="1.1.2"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeRefactoring.Testing.XUnit" Version="1.1.2"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing.XUnit" Version="1.1.2"/>
+        <PackageReference Include="VsTools.Projects" Version="1.2.0" PrivateAssets="all" GeneratePathProperty="true"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0"/>
+        <PackageReference Include="xunit" Version="2.8.1"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
 
@@ -38,24 +38,35 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Frank.Refactoring.AutoProperties\Frank.Refactoring.AutoProperties.csproj" />
-      <ProjectReference Include="..\Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.csproj" />
-      <ProjectReference Include="..\Frank.SourceGenerator.AdditionalFiles\Frank.SourceGenerator.AdditionalFiles.csproj" />
+        <ProjectReference Include="..\Frank.Refactoring.AutoProperties\Frank.Refactoring.AutoProperties.csproj"/>
+        <ProjectReference Include="..\Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.csproj"/>
+        <ProjectReference Include="..\Frank.SourceGenerator.AdditionalFiles\Frank.SourceGenerator.AdditionalFiles.csproj"/>
+        <ProjectReference Include="..\Frank.Analyzers.AutoMapper\Frank.Analyzers.AutoMapper.csproj"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-        <PackageReference Remove="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" />
+        <PackageReference Remove="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Frank.SourceGenerator.AdditionalFiles\Frank.SourceGenerator.AdditionalFiles.csproj"
                           OutputItemType="Analyzer"
                           ReferenceOutputAssembly="false"
-                          PrivateAssets="all" />
+                          PrivateAssets="all"/>
+        
+        <ProjectReference Include="..\Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.csproj"
+                            OutputItemType="Analyzer"
+                            ReferenceOutputAssembly="false"
+                            PrivateAssets="all"/>
+        
+        <ProjectReference Include="..\Frank.Analyzers.AutoMapper\Frank.Analyzers.AutoMapper.csproj"
+                            OutputItemType="Analyzer"
+                            ReferenceOutputAssembly="false"
+                            PrivateAssets="all"/>
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="TestingInfrastructure\Files\**" CopyToOutputDirectory="PreserveNewest" />
+        <AdditionalFiles Include="TestingInfrastructure\Files\**" CopyToOutputDirectory="PreserveNewest"/>
     </ItemGroup>
 
 </Project>

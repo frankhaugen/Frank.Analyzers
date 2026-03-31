@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing;
-using Xunit.Abstractions;
 
 namespace Frank.Analyzers.Tests.Analyzers;
 
@@ -34,6 +33,7 @@ public class AutoPropertyAnalyzerTests
                 }
             }
             """;
+        
         await new CSharpAnalyzerTest<AutoPropertySyntaxAnalyzer, DefaultVerifier>
         {
             TestCode = code,
