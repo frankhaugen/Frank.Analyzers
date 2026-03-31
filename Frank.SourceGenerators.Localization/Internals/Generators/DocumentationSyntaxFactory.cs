@@ -1,4 +1,5 @@
-﻿using System.Text;
+using System.Text;
+using Frank.SourceGenerators.Localization.Internals;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -13,7 +14,7 @@ internal static class DocumentationSyntaxFactory
         
         if (summary is not null)
         {
-            xmlDocsBuilder.AppendLine($"<summary>{summary}</summary>");
+            xmlDocsBuilder.AppendLine($"<summary>{XmlDocumentationEscape.ForSummary(summary)}</summary>");
             // documentationCommentTriviaList = documentationCommentTriviaList.Add(SyntaxFactory.DocumentationCommentTrivia(SyntaxKind.MultiLineDocumentationCommentTrivia, SyntaxFactory.List(new XmlNodeSyntax[]
             // {
             //     SyntaxFactory.XmlElement("summary", [SyntaxFactory.XmlText(summary)])
@@ -22,7 +23,7 @@ internal static class DocumentationSyntaxFactory
         
         if (remarks is not null)
         {
-            xmlDocsBuilder.AppendLine($"<remarks>{remarks}</remarks>");
+            xmlDocsBuilder.AppendLine($"<remarks>{XmlDocumentationEscape.ForSummary(remarks)}</remarks>");
             // documentationCommentTriviaList = documentationCommentTriviaList.Add(SyntaxFactory.DocumentationCommentTrivia(SyntaxKind.MultiLineDocumentationCommentTrivia, SyntaxFactory.List(new XmlNodeSyntax[]
             // {
             //     SyntaxFactory.XmlElement("remarks", [SyntaxFactory.XmlText(remarks)])
@@ -34,7 +35,8 @@ internal static class DocumentationSyntaxFactory
             xmlDocsBuilder.AppendLine("<list type=\"bullet\">");
             foreach (var item in list)
             {
-                xmlDocsBuilder.AppendLine($"<item><description>{item}</description></item>");
+                xmlDocsBuilder.AppendLine(
+                    $"<item><description>{XmlDocumentationEscape.ForSummary(item)}</description></item>");
             }
             xmlDocsBuilder.AppendLine("</list>");
             // documentationCommentTriviaList = documentationCommentTriviaList.Add(DocumentationListGenerator.GenerateBulletListDocumentation(list));

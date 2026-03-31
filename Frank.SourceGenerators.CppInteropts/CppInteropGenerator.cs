@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using ClangSharp;
 using ClangSharp.Interop;
 using Microsoft.CodeAnalysis;

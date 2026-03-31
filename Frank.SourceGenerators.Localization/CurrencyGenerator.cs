@@ -1,4 +1,4 @@
-﻿using Frank.SourceGenerators.Localization.Internals;
+using Frank.SourceGenerators.Localization.Internals;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -28,7 +28,8 @@ public class CurrencyGenerator : ISourceGenerator
                     .WithEqualsValue(SyntaxFactory.EqualsValueClause(SyntaxFactory.LiteralExpression(
                         SyntaxKind.StringLiteralExpression,
                         SyntaxFactory.Literal(c.Code))))
-                    .WithLeadingTrivia(SyntaxFactory.ParseLeadingTrivia($"///<summary>{c.Name} ({c.EnglishName})</summary>\n"))
+                    .WithLeadingTrivia(SyntaxFactory.ParseLeadingTrivia(
+                        $"///<summary>{XmlDocumentationEscape.ForSummary($"{c.Name} ({c.EnglishName})")}</summary>\n"))
                     .WithTrailingTrivia(SyntaxFactory.LineFeed, SyntaxFactory.LineFeed)
                 );
         EnumDeclarationSyntax currencyEnum = SyntaxFactory

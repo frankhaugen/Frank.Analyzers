@@ -1,4 +1,4 @@
-﻿using Frank.SourceGenerators.Localization.Internals;
+using Frank.SourceGenerators.Localization.Internals;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -26,7 +26,8 @@ public class LanguageGenerator : ISourceGenerator
             .Select(l => 
                 SyntaxFactory
                     .EnumMemberDeclaration(l.Name)
-                    .WithLeadingTrivia(SyntaxFactory.ParseLeadingTrivia($"///<summary>{l.NativeName} ({l.EnglishName})</summary>\n"))
+                    .WithLeadingTrivia(SyntaxFactory.ParseLeadingTrivia(
+                        $"///<summary>{XmlDocumentationEscape.ForSummary($"{l.NativeName} ({l.EnglishName})")}</summary>\n"))
                     .WithEqualsValue(SyntaxFactory.EqualsValueClause(SyntaxFactory.LiteralExpression(
                         SyntaxKind.StringLiteralExpression, 
                         SyntaxFactory.Literal(l.Code)))));

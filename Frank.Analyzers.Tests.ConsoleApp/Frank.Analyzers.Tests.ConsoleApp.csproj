@@ -1,46 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <IsPackable>false</IsPackable>
+        <!-- Test harness only; GHSA-rvv3-g6hj-g44x has no patched release aligned with stable API yet for this sample. -->
+        <NoWarn>$(NoWarn);NU1903</NoWarn>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="13.0.1" />
-        <PackageReference Include="ClangSharp.PInvokeGenerator" Version="18.1.0" />
+        <PackageReference Include="AutoMapper" Version="12.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Frank.SourceGenerator.AdditionalFiles\Frank.SourceGenerator.AdditionalFiles.csproj"
-                          OutputItemType="Analyzer"
-                          ReferenceOutputAssembly="false"
-                          PrivateAssets="all"/>
-        <ProjectReference Include="..\Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.csproj"
-                          OutputItemType="Analyzer"
-                          ReferenceOutputAssembly="false"
-                          PrivateAssets="all"/>
-        <ProjectReference Include="..\Frank.Refactoring.AutoProperties\Frank.Refactoring.AutoProperties.csproj"
-                          OutputItemType="Analyzer"
-                          ReferenceOutputAssembly="false"
-                          PrivateAssets="all"/>
-        <ProjectReference Include="..\Frank.SourceGenerators.CppInteropts\Frank.SourceGenerators.CppInteropts.csproj"
-                          OutputItemType="Analyzer"
-                          ReferenceOutputAssembly="false"
-                          PrivateAssets="all"/>
-        <ProjectReference Include="..\Frank.SourceGenerators.Localization\Frank.SourceGenerators.Localization.csproj"
-                          OutputItemType="Analyzer"
-                          ReferenceOutputAssembly="false"
-                          PrivateAssets="all"/>
-        <ProjectReference Include="..\Frank.Analyzers.AutoMapper\Frank.Analyzers.AutoMapper.csproj"
-                          OutputItemType="Analyzer"
-                          ReferenceOutputAssembly="false"
-                          PrivateAssets="all"/>
+        <ProjectReference Include="..\Frank.SourceGenerator.AdditionalFiles\Frank.SourceGenerator.AdditionalFiles.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
+        <ProjectReference Include="..\Frank.Analyzers.CodeLength\Frank.Analyzers.CodeLength.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
+        <ProjectReference Include="..\Frank.Refactoring.AutoProperties\Frank.Refactoring.AutoProperties.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
+        <ProjectReference Include="..\Frank.SourceGenerators.Localization\Frank.SourceGenerators.Localization.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
+        <ProjectReference Include="..\Frank.Analyzers.AutoMapper\Frank.Analyzers.AutoMapper.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
     </ItemGroup>
 
-    <ItemGroup>
-        <AdditionalFiles Include="assets\**\*.h" CopyToOutputDirectory="PreserveNewest"/>
-        <!--        <AdditionalFiles Include="assets\**\*.c" CopyToOutputDirectory="PreserveNewest" />-->
-        <!--        <AdditionalFiles Include="assets\**\*.cpp" CopyToOutputDirectory="PreserveNewest" />-->
-    </ItemGroup>
+    <!-- C++ interop generator (Frank.SourceGenerators.CppInteropts) is not referenced here: Roslyn does not load transitive analyzer dependencies (ClangSharp). -->
 
 </Project>

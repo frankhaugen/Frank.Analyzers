@@ -1,8 +1,8 @@
-﻿namespace Frank.Analyzers.Tests.ConsoleApp.Models;
+namespace Frank.Analyzers.Tests.ConsoleApp.Models;
 
 public class Source
 {
-    public string Name { get; set; }
+    public required string Name { get; set; }
     
     public string? Description { get; set; }
     

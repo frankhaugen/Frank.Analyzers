@@ -1,6 +1,6 @@
-﻿namespace Frank.Analyzers.Tests.ConsoleApp.Models;
+namespace Frank.Analyzers.Tests.ConsoleApp.Models;
 
 class MyClass
 {
-    public string Name { get; set; }
+    public required string Name { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Frank.SourceGenerators.Localization.Internals;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -36,7 +36,8 @@ public class CountryEnumGenerator : ISourceGenerator
             .Select((r, i) => 
                 SyntaxFactory
                     .EnumMemberDeclaration(r.TwoLetterISORegionName.ToUpperInvariant())
-                    .WithLeadingTrivia(SyntaxFactory.ParseLeadingTrivia($"///<summary>{r.NativeName} ({r.EnglishName})</summary>\n"))
+                    .WithLeadingTrivia(SyntaxFactory.ParseLeadingTrivia(
+                        $"///<summary>{XmlDocumentationEscape.ForSummary($"{r.NativeName} ({r.EnglishName})")}</summary>\n"))
                     .WithEqualsValue(SyntaxFactory.EqualsValueClause(SyntaxFactory.LiteralExpression(
                         SyntaxKind.StringLiteralExpression, 
                         SyntaxFactory.Literal(i)))));
