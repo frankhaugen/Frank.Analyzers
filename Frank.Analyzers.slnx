@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/Solution Files/">
+    <File Path=".github/workflows/merge.yml" />
+    <File Path=".github/workflows/pull-request.yml" />
+    <File Path=".github/workflows/release.yml" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="icon.png" />
+    <File Path="LICENSE" />
+    <File Path="nuget.config" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="Frank.Analyzers.AutoMapper/Frank.Analyzers.AutoMapper.csproj" />
+  <Project Path="Frank.Analyzers.BlankAnalyzer/Frank.Analyzers.BlankAnalyzer.csproj" />
+  <Project Path="Frank.Analyzers.CodeLength/Frank.Analyzers.CodeLength.csproj" />
+  <Project Path="Frank.Analyzers.Tests.ConsoleApp/Frank.Analyzers.Tests.ConsoleApp.csproj" />
+  <Project Path="Frank.Analyzers.Tests/Frank.Analyzers.Tests.csproj" />
+  <Project Path="Frank.Refactoring.AutoProperties/Frank.Refactoring.AutoProperties.csproj" />
+  <Project Path="Frank.SourceGenerator.AdditionalFiles/Frank.SourceGenerator.AdditionalFiles.csproj" />
+  <Project Path="Frank.SourceGenerators.CppInteropts/Frank.SourceGenerators.CppInteropts.csproj" />
+  <Project Path="Frank.SourceGenerators.Localization/Frank.SourceGenerators.Localization.csproj" />
+  <Project Path="Frank.SourceGenerators.XUnit/Frank.SourceGenerators.XUnit.csproj" />
+</Solution>
